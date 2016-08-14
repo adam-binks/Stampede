@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7d2bba2e7b871564486757b32327053a
+timeCreated: 1471177751
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - queen: {instanceID: 0}
+  - carcassPrefab: {fileID: 157772, guid: 6f035b69a0c35584794e903bce1be1e2, type: 2}
+  executionOrder: -100
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
