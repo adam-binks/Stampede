@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Creature : MonoBehaviour {
 
+	public string species;
 	[RangeAttribute(0, 10)]
 	public int trophicLevel; // position on the food chain: used by other creatures to determine predator or prey
 	public static List<Creature> AllCreatures;
@@ -49,6 +50,10 @@ public class Creature : MonoBehaviour {
 		}
 
 		health = maxHealth;
+
+		if (species == null || species == "") {
+			Debug.LogError("Must set species", this);
+		} 
 	}
 	
 	
@@ -128,7 +133,7 @@ public class Creature : MonoBehaviour {
 
 		// spawn a carcass
 		GameObject carcassGO = (GameObject)Instantiate(carcassPrefab);
-		carcassGO.GetComponent<Carcass>().Setup(trophicLevel, foodOnCarcass, transform.position);
+		carcassGO.GetComponent<Carcass>().Setup(trophicLevel, foodOnCarcass, transform.position, species);
 		carcassGO.GetComponent<SpriteRenderer>().sprite = carcassSprite;
 	}
 

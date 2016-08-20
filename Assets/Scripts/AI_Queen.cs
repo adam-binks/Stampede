@@ -31,11 +31,13 @@ public class AI_Queen : MonoBehaviour {
 
 
 	void Start () {
-		SetupQueen();
+		thisCreature = GetComponent<Creature>();
+		if (thisCreature.isQueen) {
+			SetupQueen();
+		}
 	}
 
 	void SetupQueen() {
-		thisCreature = GetComponent<Creature>();
 		thisCreature.isQueen = true;
 		thisCreature.walkSpeed = walkSpeed;
 		thisCreature.runSpeed = runSpeed;
@@ -46,11 +48,21 @@ public class AI_Queen : MonoBehaviour {
 	}
 
 
+	public void EatFood() {
+		currentFood ++;
+		if (currentFood >= foodPerOffspring) {
+			LayEgg();
+		}
+	}
+
+
 	void LayEgg() {
+		Debug.Log("Lay egg!");
 		if ((offspring.Count + eggs.Count) >= maxOffspring) {
 			// can't lay any more eggs
 			return;
 		}
+		
 		GameObject eggGO = (GameObject)Instantiate(eggPrefab, transform.position, Quaternion.identity);
 		Egg egg = eggGO.GetComponent<Egg>();
 		eggs.Add(egg);
@@ -67,13 +79,16 @@ public class AI_Queen : MonoBehaviour {
 		offspringGO.transform.localScale = new Vector2(offspringScale, offspringScale);
 		Creature offspringCreature = offspringGO.GetComponent<Creature>();
 		offspringCreature.queen = this;
+		offspringCreature.isQueen = false;
 	}
 
 
 	public bool IsInRoamRadius(Vector2 offspringPos) {
-		if (Vector2.Distance(offspringPos, transform.position) > offspringRoamRadius) {
+		if (Vector2.Distance(offspringPos, transform.position) < offspringRoamRadius) {
+			Debug.Log("Wander");
 			return true;
 		}
+		Debug.Log("Go home");
 		return false;
 	}
 }

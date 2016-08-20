@@ -76,8 +76,12 @@ public class AI_Hunt : MonoBehaviour {
 		if (thisCreature.isAlive) {
 			target = null;
 			float targetDist = float.PositiveInfinity;
-			foreach (Creature creature in Creature.AllCreatures)
-			{	
+			foreach (Creature creature in Creature.AllCreatures) {	
+				// no cannibalism!
+				if (creature.species == thisCreature.species) {
+					continue;
+				}
+				
 				// check if trophic level is correct
 				if (creature.trophicLevel <= queen.maxPreyTrophic && creature.trophicLevel >= queen.minPreyTrophic) {
 					// check if closer than previous target

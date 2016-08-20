@@ -16,6 +16,6 @@ public class Egg : MonoBehaviour {
 	
 	void Hatch() {
 		queen.CreateOffspring(transform.position);
-		Destroy(this);
+		Destroy(this.gameObject);
 	}
 }
