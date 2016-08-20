@@ -8,14 +8,17 @@ public class Egg : MonoBehaviour {
 
 	void Start () {
 		if (hatchTime == 0 || queen == null) {
-			Debug.LogError("Egg properties not passed by queen, ya dingus!", queen);
+			Debug.LogError("Egg properties not passed by queen", queen);
 		}
 
 		Invoke("Hatch", hatchTime);
 	}
 	
 	void Hatch() {
-		queen.CreateOffspring(transform.position);
+		// if the queen is dead, just break the egg. (does this make sense tho?)
+		if (queen != null) {
+			queen.CreateOffspring(transform.position);
+		}
 		Destroy(this.gameObject);
 	}
 }

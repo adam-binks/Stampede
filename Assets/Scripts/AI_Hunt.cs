@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Creature))]
 [RequireComponent(typeof(AI_Queen))]
 
+/// Hunt the nearest enemy of trophic level specified in AI_Queen
 public class AI_Hunt : MonoBehaviour {
 	public float maxChaseDistance = 15;
 	public float maxAttackRadius = 1.5f;

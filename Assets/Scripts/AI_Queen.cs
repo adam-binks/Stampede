@@ -57,7 +57,6 @@ public class AI_Queen : MonoBehaviour {
 
 
 	void LayEgg() {
-		Debug.Log("Lay egg!");
 		if ((offspring.Count + eggs.Count) >= maxOffspring) {
 			// can't lay any more eggs
 			return;
@@ -85,10 +84,8 @@ public class AI_Queen : MonoBehaviour {
 
 	public bool IsInRoamRadius(Vector2 offspringPos) {
 		if (Vector2.Distance(offspringPos, transform.position) < offspringRoamRadius) {
-			Debug.Log("Wander");
 			return true;
 		}
-		Debug.Log("Go home");
 		return false;
 	}
 }

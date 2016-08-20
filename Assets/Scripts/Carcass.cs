@@ -14,13 +14,13 @@ public class Carcass : MonoBehaviour {
 	void Start() {
 		// plants set themselves up rather than being set up by the dying animal
 		if (isPlant) {
-			Setup(trophicLevel, remainingFood, transform.position, species);
+			Setup(trophicLevel, remainingFood, transform.position, species, 1);
 		}
 	}
 
 
 	/// Called by the dying animal (or Start() if this is a plant)
-	public void Setup(int trophLvl, float foodAmount, Vector2 animalPosition, string thisSpecies) {
+	public void Setup(int trophLvl, float foodAmount, Vector2 animalPosition, string thisSpecies, float scale) {
 		// setup lists if this is the first carcass
 		if (AllCarcassesByTrophicLevel == null) {
 			AllCarcassesByTrophicLevel = new List<List<Carcass>>();
@@ -36,10 +36,12 @@ public class Carcass : MonoBehaviour {
 
 		remainingFood = foodAmount;
 		transform.position = animalPosition;
+		transform.localScale = new Vector2(scale, scale);
 		species = thisSpecies;
 	}
 
 
+	/// Called by feeding creature in AI_SeekFood
 	public void TakeBite(float foodToSubtract) {
 		remainingFood -= foodToSubtract;
 		if (remainingFood <= 0) {

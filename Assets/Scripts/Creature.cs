@@ -133,13 +133,21 @@ public class Creature : MonoBehaviour {
 
 		// spawn a carcass
 		GameObject carcassGO = (GameObject)Instantiate(carcassPrefab);
-		carcassGO.GetComponent<Carcass>().Setup(trophicLevel, foodOnCarcass, transform.position, species);
+		float carcassScale = isQueen ? 1 : queen.offspringScale; // offspring carcasses are smaller
+		carcassGO.GetComponent<Carcass>().Setup(trophicLevel, foodOnCarcass, transform.position, species, carcassScale);
 		carcassGO.GetComponent<SpriteRenderer>().sprite = carcassSprite;
 	}
 
 	
 	public void MoveTowards(Vector3 targetPos, float weight, bool urgency) {
 		Vector2 direction = targetPos - transform.position;
+		WeightedDirection wd =  new WeightedDirection(direction, weight, urgency, Intention.Move);
+		desiredDirections.Add(wd);
+	}
+
+
+	public void MoveAwayFrom(Vector3 targetPos, float weight, bool urgency) {
+		Vector2 direction = transform.position - targetPos;
 		WeightedDirection wd =  new WeightedDirection(direction, weight, urgency, Intention.Move);
 		desiredDirections.Add(wd);
 	}
