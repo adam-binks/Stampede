@@ -82,8 +82,9 @@ public class AI_Queen : MonoBehaviour {
 	}
 
 
-	public bool IsInRoamRadius(Vector2 offspringPos) {
-		if (Vector2.Distance(offspringPos, transform.position) < offspringRoamRadius) {
+	public bool IsInRoamRadius(Vector2 offspringPos, out float distance) {
+		distance = Vector2.Distance(offspringPos, transform.position);
+		if (distance < offspringRoamRadius) {
 			return true;
 		}
 		return false;

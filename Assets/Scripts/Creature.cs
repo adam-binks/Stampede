@@ -20,7 +20,7 @@ public class Creature : MonoBehaviour {
 	public bool isQueen = false;
 	[HideInInspector]
 	public AI_Queen queen;
-	public bool canMove = true;
+	public bool creatureCanMove = true;
 	public bool isAlive = true;
 	public float maxHealth = 100;
 	public float health;
@@ -29,12 +29,14 @@ public class Creature : MonoBehaviour {
 	public GameObject carcassPrefab;
 	public float foodOnCarcass = 100;
 	public Sprite carcassSprite;
+	/// If true (eating, attacking etc), don't move or anything.
+	public bool isBusy = false;
 
 	private Move move;
 
 
 	void Start () {
-		if (canMove) {
+		if (creatureCanMove) {
 			move = GetComponent<Move>();
 			move.acceleration = acceleration;
 		}
@@ -59,7 +61,7 @@ public class Creature : MonoBehaviour {
 	
 	void Update () {
 		// plants don't need to move obviously
-		if (canMove) {
+		if (creatureCanMove && !isBusy) {
 			UpdateAI();
 		}
 	}
@@ -127,7 +129,6 @@ public class Creature : MonoBehaviour {
 		if (isQueen) {
 			// do something to offspring. just kill them all?
 		}
-		Debug.Log("RIP", this);
 		AllCreatures.Remove(this);
 		Destroy(this.gameObject);
 

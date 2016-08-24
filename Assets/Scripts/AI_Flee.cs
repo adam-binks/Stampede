@@ -12,13 +12,11 @@ public class AI_Flee : MonoBehaviour {
 	public float AIBehaviourWeight = 30;
 
 	private Creature target;
-	private AI_Queen queen;
 	private Creature thisCreature;
 
 
 	void Start () {
 		thisCreature = GetComponent<Creature>();
-		queen = GetComponent<AI_Queen>();
 		StartCoroutine(GetNearestPredator(0.1f));
 	}
 
